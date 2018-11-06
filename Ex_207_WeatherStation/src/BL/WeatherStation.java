@@ -10,12 +10,13 @@ package BL;
  * @author johannesriedmueller
  */
 public class WeatherStation {
+
     private String place;
     private int seaLevel;
     private double temperature;
     private int humidity;
 
-    public WeatherStation(String place, int seaLevel, double temperature, int humidity) throws Exception{
+    public WeatherStation(String place, int seaLevel, double temperature, int humidity) throws Exception {
         this.place = place;
         this.seaLevel = seaLevel;
         setHumidity(humidity);
@@ -38,24 +39,20 @@ public class WeatherStation {
         return humidity;
     }
 
-    public void setTemperature(double temperature) throws Exception{
-        if(temperature >= -35 && temperature <= 45){
-        this.temperature = temperature;
-        }
-        else{
+    public void setTemperature(double temperature) throws Exception {
+        if (temperature >= -35 && temperature <= 45) {
+            this.temperature = temperature;
+        } else {
             throw new Exception("Temperature isn't valid.");
         }
     }
 
-    public void setHumidity(int humidity) throws Exception{
-        if(humidity >= 0 && humidity <= 100){
-        this.humidity = humidity;
-        }
-        else{
+    public void setHumidity(int humidity) throws Exception {
+        if (humidity >= 0 && humidity <= 100) {
+            this.humidity = humidity;
+        } else {
             throw new Exception("Humidity isn't valid.");
         }
     }
-    
-    
-    
+
 }

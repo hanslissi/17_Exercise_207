@@ -96,10 +96,10 @@ public class WeatherStationDialog extends javax.swing.JDialog {
     }
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
-        try{
-        weatherStation = new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()), Double.parseDouble(tfTemp.getText()), Integer.parseInt(tfHumidity.getText()));
-        ok = true;
-        this.dispose();
+        try {
+            weatherStation = new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()), Double.parseDouble(tfTemp.getText()), Integer.parseInt(tfHumidity.getText()));
+            ok = true;
+            this.dispose();
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());

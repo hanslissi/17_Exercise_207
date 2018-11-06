@@ -41,12 +41,10 @@ public class myTableCellRenderer implements TableCellRenderer {
         }
         if (ws.getTemperature() > 25 && ws.getHumidity() < 20) {
             label.setBackground(Color.YELLOW);
-        }
-        else if(ws.getTemperature() < 0 && ws.getHumidity() < 30){
+        } else if (ws.getTemperature() < 0 && ws.getHumidity() < 30) {
             label.setBackground(Color.BLUE);
             label.setForeground(Color.WHITE);
-        }
-        else if((ws.getTemperature() >= 0 && ws.getTemperature() <= 25) && ws.getHumidity() > 50){
+        } else if ((ws.getTemperature() >= 0 && ws.getTemperature() <= 25) && ws.getHumidity() > 50) {
             label.setBackground(Color.GREEN);
         }
         return label;
