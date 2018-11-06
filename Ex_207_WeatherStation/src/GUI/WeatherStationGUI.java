@@ -5,17 +5,21 @@
  */
 package GUI;
 
+import BL.WeatherStationBL;
+import BL.myTableCellRenderer;
+
 /**
  *
  * @author johannesriedmueller
  */
 public class WeatherStationGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form WeatherStationGUI
-     */
+    private WeatherStationBL bl = new WeatherStationBL();
+    private myTableCellRenderer tcr = new myTableCellRenderer();
     public WeatherStationGUI() {
         initComponents();
+        taAll.setModel(bl);
+        taAll.setDefaultRenderer(Object.class, tcr);
     }
 
     /**
@@ -28,7 +32,7 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        taAll = new javax.swing.JTable();
         mbTop = new javax.swing.JMenuBar();
         meStations = new javax.swing.JMenu();
         miAdd = new javax.swing.JMenuItem();
@@ -39,7 +43,7 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        taAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -50,16 +54,26 @@ public class WeatherStationGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(taAll);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         meStations.setText("Stations");
 
         miAdd.setText("Add Weather Satation");
+        miAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAddActionPerformed(evt);
+            }
+        });
         meStations.add(miAdd);
 
         miRemove.setText("Add Weather Station");
+        miRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoveActionPerformed(evt);
+            }
+        });
         meStations.add(miRemove);
 
         mbTop.add(meStations);
@@ -67,9 +81,19 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         meValues.setText("Values");
 
         miSetTemp.setText("Set Temperature");
+        miSetTemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSetTempActionPerformed(evt);
+            }
+        });
         meValues.add(miSetTemp);
 
         miSetHumidity.setText("Set Humidity");
+        miSetHumidity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSetHumidityActionPerformed(evt);
+            }
+        });
         meValues.add(miSetHumidity);
 
         mbTop.add(meValues);
@@ -78,6 +102,26 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
+        WeatherStationDialog wsDialog = new WeatherStationDialog(this, true);
+        wsDialog.setVisible(true);
+        if(wsDialog.isOk()){
+            bl.add(wsDialog.getWeatherStation());
+        }
+    }//GEN-LAST:event_miAddActionPerformed
+
+    private void miRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miRemoveActionPerformed
+
+    private void miSetTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetTempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miSetTempActionPerformed
+
+    private void miSetHumidityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetHumidityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_miSetHumidityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,7 +160,6 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuBar mbTop;
     private javax.swing.JMenu meStations;
     private javax.swing.JMenu meValues;
@@ -124,5 +167,6 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem miRemove;
     private javax.swing.JMenuItem miSetHumidity;
     private javax.swing.JMenuItem miSetTemp;
+    private javax.swing.JTable taAll;
     // End of variables declaration//GEN-END:variables
 }

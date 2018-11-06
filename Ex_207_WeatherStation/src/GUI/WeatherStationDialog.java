@@ -5,15 +5,17 @@
  */
 package GUI;
 
+import BL.WeatherStation;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author johannesriedmueller
  */
 public class WeatherStationDialog extends javax.swing.JDialog {
 
-    /**
-     * Creates new form WeatherStationDialog
-     */
+    private WeatherStation weatherStation;
+    private boolean ok;
     public WeatherStationDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -28,21 +30,86 @@ public class WeatherStationDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        tfPlace = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfSeaLevel = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfTemp = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfHumidity = new javax.swing.JTextField();
+        btOK = new javax.swing.JButton();
+        btCancel = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridLayout(5, 2));
+
+        jLabel1.setText("Place");
+        getContentPane().add(jLabel1);
+
+        tfPlace.setText("Bregenz");
+        getContentPane().add(tfPlace);
+
+        jLabel2.setText("Sea Level");
+        getContentPane().add(jLabel2);
+
+        tfSeaLevel.setText("435");
+        getContentPane().add(tfSeaLevel);
+
+        jLabel3.setText("Temperature");
+        getContentPane().add(jLabel3);
+
+        tfTemp.setText("10.9");
+        getContentPane().add(tfTemp);
+
+        jLabel4.setText("rel. Humidity");
+        getContentPane().add(jLabel4);
+
+        tfHumidity.setText("78");
+        getContentPane().add(tfHumidity);
+
+        btOK.setText("OK");
+        btOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOKActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btOK);
+
+        btCancel.setText("Cancel");
+        btCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btCancel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    public WeatherStation getWeatherStation() {
+        return weatherStation;
+    }
+
+    public boolean isOk() {
+        return ok;
+    }
+
+    private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
+        try{
+        weatherStation = new WeatherStation(tfPlace.getText(), Integer.parseInt(tfSeaLevel.getText()), Double.parseDouble(tfTemp.getText()), Integer.parseInt(tfHumidity.getText()));
+        ok = true;
+        this.dispose();
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Something is wrong with the input!");
+        }
+    }//GEN-LAST:event_btOKActionPerformed
+
+    private void btCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelActionPerformed
+        ok = false;
+        this.dispose();
+    }//GEN-LAST:event_btCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -87,5 +154,15 @@ public class WeatherStationDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCancel;
+    private javax.swing.JButton btOK;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField tfHumidity;
+    private javax.swing.JTextField tfPlace;
+    private javax.swing.JTextField tfSeaLevel;
+    private javax.swing.JTextField tfTemp;
     // End of variables declaration//GEN-END:variables
 }
