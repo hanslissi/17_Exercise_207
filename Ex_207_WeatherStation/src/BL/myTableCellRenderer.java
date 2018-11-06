@@ -20,6 +20,7 @@ public class myTableCellRenderer implements TableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         WeatherStation ws = (WeatherStation) value;
         JLabel label = new JLabel();
+        if(ws == null) return label;
         label.setOpaque(true);
         switch(column){
             case 0: label.setText(ws.getPlace()); break;

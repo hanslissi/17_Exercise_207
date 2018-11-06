@@ -27,6 +27,21 @@ public class WeatherStationBL extends AbstractTableModel {
         fireTableRowsDeleted(index-1, index);
     }
 
+    public void remove(int[] indices){
+        for (int index : indices) {
+            stations.remove(index);
+        }
+        fireTableRowsDeleted(indices[0], indices[indices.length-1]);
+    }
+    
+    public void setTemperature(int index, double temperature) throws Exception{
+        stations.get(index).setTemperature(temperature);
+    }
+    
+    public void setHumidity(int index, int humidity) throws Exception{
+        stations.get(index).setHumidity(humidity);
+    }
+    
     @Override
     public String getColumnName(int column) {
         return colNames[column];

@@ -7,6 +7,7 @@ package GUI;
 
 import BL.WeatherStationBL;
 import BL.myTableCellRenderer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -112,15 +113,39 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miAddActionPerformed
 
     private void miRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveActionPerformed
-        // TODO add your handling code here:
+        switch(taAll.getSelectedRowCount()) {
+            case 0: JOptionPane.showMessageDialog(null, "You didn't select an item."); break;
+            case 1: bl.remove(taAll.getSelectedRow()); break;
+            default: bl.remove(taAll.getSelectedRows());
+        }
     }//GEN-LAST:event_miRemoveActionPerformed
 
     private void miSetTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetTempActionPerformed
-        // TODO add your handling code here:
+        if(taAll.getSelectedRowCount()==1){
+            try{
+            bl.setTemperature(taAll.getSelectedRow(), Double.parseDouble(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Select ONE item!");
+        }
     }//GEN-LAST:event_miSetTempActionPerformed
 
     private void miSetHumidityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetHumidityActionPerformed
-        // TODO add your handling code here:
+        if(taAll.getSelectedRowCount()==1){
+            try{
+            bl.setHumidity(taAll.getSelectedRow(), Integer.parseInt(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Select ONE item!");
+        }
     }//GEN-LAST:event_miSetHumidityActionPerformed
 
     /**

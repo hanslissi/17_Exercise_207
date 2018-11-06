@@ -15,11 +15,11 @@ public class WeatherStation {
     private double temperature;
     private int humidity;
 
-    public WeatherStation(String place, int seaLevel, double temperature, int humidity) {
+    public WeatherStation(String place, int seaLevel, double temperature, int humidity) throws Exception{
         this.place = place;
         this.seaLevel = seaLevel;
-        this.temperature = temperature;
-        this.humidity = humidity;
+        setHumidity(humidity);
+        setTemperature(temperature);
     }
 
     public String getPlace() {
@@ -37,6 +37,25 @@ public class WeatherStation {
     public int getHumidity() {
         return humidity;
     }
+
+    public void setTemperature(double temperature) throws Exception{
+        if(temperature >= -35 && temperature <= 45){
+        this.temperature = temperature;
+        }
+        else{
+            throw new Exception("Temperature isn't valid.");
+        }
+    }
+
+    public void setHumidity(int humidity) throws Exception{
+        if(humidity >= 0 && humidity <= 100){
+        this.humidity = humidity;
+        }
+        else{
+            throw new Exception("Humidity isn't valid.");
+        }
+    }
+    
     
     
 }

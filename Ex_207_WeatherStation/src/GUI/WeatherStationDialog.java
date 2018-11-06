@@ -102,7 +102,7 @@ public class WeatherStationDialog extends javax.swing.JDialog {
         this.dispose();
         }
         catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Something is wrong with the input!");
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_btOKActionPerformed
 
