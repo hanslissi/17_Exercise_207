@@ -15,8 +15,10 @@ import javax.swing.table.AbstractTableModel;
 public class WeatherStationBL extends AbstractTableModel {
 
     private ArrayList<WeatherStation> stations = new ArrayList<>();
-    private String[] colNames = {"Place", "Sea Level", "Temperature", "rel. Humidity"};
-
+    private String[] colNamesNormal = {"Place", "Sea Level", "Temperature", "rel. Humidity"};
+    private String[] colNamesHiddenSea = {"Place", "Temperature", "rel. Humidity"};
+    private boolean hiddenSeaLevel = false;
+    
     public void add(WeatherStation ws) {
         stations.add(ws);
         fireTableRowsInserted(stations.size() - 1, stations.size() - 1);
@@ -42,9 +44,22 @@ public class WeatherStationBL extends AbstractTableModel {
         stations.get(index).setHumidity(humidity);
     }
     
+    public void hideShowSeaLevel(){
+        if(hiddenSeaLevel){
+            hiddenSeaLevel = false;
+        }
+        else{
+            hiddenSeaLevel = true;
+        }
+        fireTableStructureChanged();
+    }
+    
     @Override
     public String getColumnName(int column) {
-        return colNames[column];
+        if(hiddenSeaLevel){
+            return colNamesHiddenSea[column];
+        }
+        return colNamesNormal[column];
     }
     
     @Override
@@ -54,7 +69,10 @@ public class WeatherStationBL extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return colNames.length;
+        if(hiddenSeaLevel){
+            return colNamesHiddenSea.length;
+        }
+        return colNamesNormal.length;
     }
 
     @Override

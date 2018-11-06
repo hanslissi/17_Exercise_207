@@ -24,9 +24,9 @@ public class myTableCellRenderer implements TableCellRenderer{
         label.setOpaque(true);
         switch(column){
             case 0: label.setText(ws.getPlace()); break;
-            case 1: label.setText(Integer.toString(ws.getSeaLevel())); break;
-            case 2: label.setText(Double.toString(ws.getTemperature())); break;
-            case 3: label.setText(Integer.toString(ws.getHumidity())); break;
+            case 1: label.setText(Integer.toString(ws.getSeaLevel())+"m"); break;
+            case 2: label.setText(Double.toString(ws.getTemperature())+"°C"); break;
+            case 3: label.setText(Integer.toString(ws.getHumidity())+"%"); break;
         }
         return label;
     }

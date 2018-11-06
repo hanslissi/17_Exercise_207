@@ -32,6 +32,8 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pm1 = new javax.swing.JPopupMenu();
+        miHideSeaLevel = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         taAll = new javax.swing.JTable();
         mbTop = new javax.swing.JMenuBar();
@@ -41,6 +43,14 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         meValues = new javax.swing.JMenu();
         miSetTemp = new javax.swing.JMenuItem();
         miSetHumidity = new javax.swing.JMenuItem();
+
+        miHideSeaLevel.setText("Hide/Show Sea Level");
+        miHideSeaLevel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miHideSeaLevelActionPerformed(evt);
+            }
+        });
+        pm1.add(miHideSeaLevel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +65,7 @@ public class WeatherStationGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        taAll.setComponentPopupMenu(pm1);
         jScrollPane1.setViewportView(taAll);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -148,6 +159,10 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_miSetHumidityActionPerformed
 
+    private void miHideSeaLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miHideSeaLevelActionPerformed
+        bl.hideShowSeaLevel();
+    }//GEN-LAST:event_miHideSeaLevelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,9 +204,11 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     private javax.swing.JMenu meStations;
     private javax.swing.JMenu meValues;
     private javax.swing.JMenuItem miAdd;
+    private javax.swing.JMenuItem miHideSeaLevel;
     private javax.swing.JMenuItem miRemove;
     private javax.swing.JMenuItem miSetHumidity;
     private javax.swing.JMenuItem miSetTemp;
+    private javax.swing.JPopupMenu pm1;
     private javax.swing.JTable taAll;
     // End of variables declaration//GEN-END:variables
 }
