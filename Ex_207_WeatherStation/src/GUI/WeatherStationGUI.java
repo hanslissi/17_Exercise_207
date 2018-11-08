@@ -7,6 +7,7 @@ package GUI;
 
 import BL.WeatherStationBL;
 import BL.myTableCellRenderer;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +18,7 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
     private WeatherStationBL bl = new WeatherStationBL();
     private myTableCellRenderer tcr = new myTableCellRenderer();
+
     public WeatherStationGUI() {
         initComponents();
         taAll.setModel(bl);
@@ -43,6 +45,8 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         meValues = new javax.swing.JMenu();
         miSetTemp = new javax.swing.JMenuItem();
         miSetHumidity = new javax.swing.JMenuItem();
+        meFile = new javax.swing.JMenu();
+        miSave = new javax.swing.JMenuItem();
 
         miHideSeaLevel.setText("Hide/Show Sea Level");
         miHideSeaLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +114,19 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
         mbTop.add(meValues);
 
+        meFile.setText("File");
+
+        miSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_MASK));
+        miSave.setText("save");
+        miSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSaveActionPerformed(evt);
+            }
+        });
+        meFile.add(miSave);
+
+        mbTop.add(meFile);
+
         setJMenuBar(mbTop);
 
         pack();
@@ -118,50 +135,60 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     private void miAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAddActionPerformed
         WeatherStationDialog wsDialog = new WeatherStationDialog(this, true);
         wsDialog.setVisible(true);
-        if(wsDialog.isOk()){
+        if (wsDialog.isOk()) {
             bl.add(wsDialog.getWeatherStation());
         }
     }//GEN-LAST:event_miAddActionPerformed
 
     private void miRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoveActionPerformed
-        switch(taAll.getSelectedRowCount()) {
-            case 0: JOptionPane.showMessageDialog(null, "You didn't select an item."); break;
-            case 1: bl.remove(taAll.getSelectedRow()); break;
-            default: bl.remove(taAll.getSelectedRows());
+        switch (taAll.getSelectedRowCount()) {
+            case 0:
+                JOptionPane.showMessageDialog(null, "You didn't select an item.");
+                break;
+            case 1:
+                bl.remove(taAll.getSelectedRow());
+                break;
+            default:
+                bl.remove(taAll.getSelectedRows());
         }
     }//GEN-LAST:event_miRemoveActionPerformed
 
     private void miSetTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetTempActionPerformed
-        if(taAll.getSelectedRowCount()==1){
-            try{
-            bl.setTemperature(taAll.getSelectedRow(), Double.parseDouble(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
-            }
-            catch(Exception ex){
+        if (taAll.getSelectedRowCount() == 1) {
+            try {
+                bl.setTemperature(taAll.getSelectedRow(), Double.parseDouble(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Select ONE item!");
         }
     }//GEN-LAST:event_miSetTempActionPerformed
 
     private void miSetHumidityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSetHumidityActionPerformed
-        if(taAll.getSelectedRowCount()==1){
-            try{
-            bl.setHumidity(taAll.getSelectedRow(), Integer.parseInt(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
-            }
-            catch(Exception ex){
+        if (taAll.getSelectedRowCount() == 1) {
+            try {
+                bl.setHumidity(taAll.getSelectedRow(), Integer.parseInt(JOptionPane.showInputDialog("Please enter the new value for the temperature:")));
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Select ONE item!");
         }
     }//GEN-LAST:event_miSetHumidityActionPerformed
 
     private void miHideSeaLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miHideSeaLevelActionPerformed
         bl.hideShowSeaLevel();
+        tcr.setHidden();
     }//GEN-LAST:event_miHideSeaLevelActionPerformed
+
+    private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
+        try {
+            bl.save(new File("./savedStations.ser"));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error with file :(");
+        }
+    }//GEN-LAST:event_miSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,11 +228,13 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar mbTop;
+    private javax.swing.JMenu meFile;
     private javax.swing.JMenu meStations;
     private javax.swing.JMenu meValues;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miHideSeaLevel;
     private javax.swing.JMenuItem miRemove;
+    private javax.swing.JMenuItem miSave;
     private javax.swing.JMenuItem miSetHumidity;
     private javax.swing.JMenuItem miSetTemp;
     private javax.swing.JPopupMenu pm1;

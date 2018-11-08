@@ -5,6 +5,12 @@
  */
 package BL;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -18,50 +24,49 @@ public class WeatherStationBL extends AbstractTableModel {
     private String[] colNamesNormal = {"Place", "Sea Level", "Temperature", "rel. Humidity"};
     private String[] colNamesHiddenSea = {"Place", "Temperature", "rel. Humidity"};
     private boolean hiddenSeaLevel = false;
-    
+
     public void add(WeatherStation ws) {
         stations.add(ws);
         fireTableRowsInserted(stations.size() - 1, stations.size() - 1);
     }
 
-    public void remove(int index){
+    public void remove(int index) {
         stations.remove(index);
-        fireTableRowsDeleted(index-1, index);
+        fireTableRowsDeleted(index - 1, index);
     }
 
-    public void remove(int[] indices){
+    public void remove(int[] indices) {
         for (int index : indices) {
             stations.remove(index);
         }
-        fireTableRowsDeleted(indices[0], indices[indices.length-1]);
+        fireTableRowsDeleted(indices[0], indices[indices.length - 1]);
     }
-    
-    public void setTemperature(int index, double temperature) throws Exception{
+
+    public void setTemperature(int index, double temperature) throws Exception {
         stations.get(index).setTemperature(temperature);
     }
-    
-    public void setHumidity(int index, int humidity) throws Exception{
+
+    public void setHumidity(int index, int humidity) throws Exception {
         stations.get(index).setHumidity(humidity);
     }
-    
-    public void hideShowSeaLevel(){
-        if(hiddenSeaLevel){
+
+    public void hideShowSeaLevel() {
+        if (hiddenSeaLevel) {
             hiddenSeaLevel = false;
-        }
-        else{
+        } else {
             hiddenSeaLevel = true;
         }
         fireTableStructureChanged();
     }
-    
+
     @Override
     public String getColumnName(int column) {
-        if(hiddenSeaLevel){
+        if (hiddenSeaLevel) {
             return colNamesHiddenSea[column];
         }
         return colNamesNormal[column];
     }
-    
+
     @Override
     public int getRowCount() {
         return stations.size();
@@ -69,7 +74,7 @@ public class WeatherStationBL extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        if(hiddenSeaLevel){
+        if (hiddenSeaLevel) {
             return colNamesHiddenSea.length;
         }
         return colNamesNormal.length;

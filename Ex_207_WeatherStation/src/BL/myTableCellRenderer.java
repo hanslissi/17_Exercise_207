@@ -16,7 +16,18 @@ import javax.swing.table.TableCellRenderer;
  * @author johannesriedmueller
  */
 public class myTableCellRenderer implements TableCellRenderer {
+    private boolean hidden;
 
+    public void setHidden() {
+        if(hidden){
+            hidden = false;
+        }
+        else{
+            hidden = true;
+        }
+        
+    }
+    
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         WeatherStation ws = (WeatherStation) value;
@@ -25,6 +36,9 @@ public class myTableCellRenderer implements TableCellRenderer {
             return label;
         }
         label.setOpaque(true);
+        if(hidden&&column>0){
+            column++; 
+        }
         switch (column) {
             case 0:
                 label.setText(ws.getPlace());

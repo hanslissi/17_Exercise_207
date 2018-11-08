@@ -5,11 +5,13 @@
  */
 package BL;
 
+import java.io.Serializable;
+
 /**
  *
  * @author johannesriedmueller
  */
-public class WeatherStation {
+public class WeatherStation implements Serializable{
 
     private String place;
     private int seaLevel;
