@@ -57,6 +57,11 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         pm1.add(miHideSeaLevel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         taAll.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -183,8 +188,21 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miHideSeaLevelActionPerformed
 
     private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
-        
+        try {
+            bl.save(new File("./savedStations.ser"));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error with file :(");
+        }
     }//GEN-LAST:event_miSaveActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        try{
+            bl.load(new File("./savedStations.ser"));
+        }
+        catch (Exception ex){
+            JOptionPane.showMessageDialog(null, "Error with file :(");
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
