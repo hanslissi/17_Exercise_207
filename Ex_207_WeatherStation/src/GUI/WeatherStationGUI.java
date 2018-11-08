@@ -45,8 +45,6 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         meValues = new javax.swing.JMenu();
         miSetTemp = new javax.swing.JMenuItem();
         miSetHumidity = new javax.swing.JMenuItem();
-        meFile = new javax.swing.JMenu();
-        miSave = new javax.swing.JMenuItem();
 
         miHideSeaLevel.setText("Hide/Show Sea Level");
         miHideSeaLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -114,19 +112,6 @@ public class WeatherStationGUI extends javax.swing.JFrame {
 
         mbTop.add(meValues);
 
-        meFile.setText("File");
-
-        miSave.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_MASK));
-        miSave.setText("save");
-        miSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miSaveActionPerformed(evt);
-            }
-        });
-        meFile.add(miSave);
-
-        mbTop.add(meFile);
-
         setJMenuBar(mbTop);
 
         pack();
@@ -182,10 +167,6 @@ public class WeatherStationGUI extends javax.swing.JFrame {
         tcr.setHidden();
     }//GEN-LAST:event_miHideSeaLevelActionPerformed
 
-    private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
-        
-    }//GEN-LAST:event_miSaveActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -224,13 +205,11 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuBar mbTop;
-    private javax.swing.JMenu meFile;
     private javax.swing.JMenu meStations;
     private javax.swing.JMenu meValues;
     private javax.swing.JMenuItem miAdd;
     private javax.swing.JMenuItem miHideSeaLevel;
     private javax.swing.JMenuItem miRemove;
-    private javax.swing.JMenuItem miSave;
     private javax.swing.JMenuItem miSetHumidity;
     private javax.swing.JMenuItem miSetTemp;
     private javax.swing.JPopupMenu pm1;

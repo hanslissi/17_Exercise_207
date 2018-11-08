@@ -26,8 +26,15 @@ public class WeatherStationBL extends AbstractTableModel {
     private boolean hiddenSeaLevel = false;
 
     public void add(WeatherStation ws) {
-        stations.add(ws);
-        fireTableRowsInserted(stations.size() - 1, stations.size() - 1);
+        if (stations.isEmpty()) {
+            stations.add(ws);
+        } else if (stations.size() == 1) {
+            stations.add(binarySearch(stations.size() - 1, stations.size() - 1, ws.getPlace()), ws);
+        } else {
+            stations.add(binarySearch(0, stations.size() - 1, ws.getPlace()), ws);
+        }
+
+        fireTableRowsInserted(0, stations.size() - 1);
     }
 
     public void remove(int index) {
@@ -83,5 +90,20 @@ public class WeatherStationBL extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return stations.get(rowIndex);
+    }
+    
+    private int binarySearch(int li, int re, String place) {
+        if (li > re) {
+            return li;
+        }
+
+        int mi = (li + re) / 2;
+        if (place.compareToIgnoreCase(stations.get(mi).getPlace()) >= 1) {
+            return binarySearch(mi + 1, re, place);
+        }
+        if (place.compareToIgnoreCase(stations.get(mi).getPlace()) <= -1) {
+            return binarySearch(li, mi - 1, place);
+        }
+        return li;
     }
 }
