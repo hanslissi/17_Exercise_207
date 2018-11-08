@@ -183,11 +183,7 @@ public class WeatherStationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_miHideSeaLevelActionPerformed
 
     private void miSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSaveActionPerformed
-        try {
-            bl.save(new File("./savedStations.ser"));
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error with file :(");
-        }
+        
     }//GEN-LAST:event_miSaveActionPerformed
 
     /**
